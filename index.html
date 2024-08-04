@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <style>
     * {
@@ -156,26 +157,28 @@
 
     .footer {
       background: rgba(0, 0, 0, .55);
-      height: 2.5rem;
+      height: 1.5rem;
       position: fixed;
       bottom: 0;
       right: 0;
       left: 0;
       display: flex;
       align-items: center;
-      padding: 0 1.75rem;
-      gap: 1.25rem;
+      padding: 0 1rem;
+      gap: .75rem;
       justify-content: flex-end;
       transition: height .4s ease-in;
       z-index: 1;
     }
 
     .footer a {
-      font-size: .55rem;
+      font-size: .4rem;
       color: rgba(198, 198, 198, 0.7);
       font-family: "Open Sans";
       text-transform: uppercase;
-      text-decoration: none
+      text-decoration: none;
+      text-wrap: nowrap;
+      transition: font-size .4s ease-in;
     }
 
     .footer a:hover {
@@ -191,7 +194,7 @@
       transform: scale(2.5);
     }
 
-    @media (min-width: 360px) {
+    @media (min-width: 400px) {
       .v1-layout {
         gap: 0rem;
         padding-top: 1.5rem;
@@ -224,6 +227,17 @@
 
       .navbar a {
         font-size: 0;
+      }
+
+      .footer {
+        height: 2.5rem;
+        padding: 0 1.75rem;
+        gap: 1.25rem;
+
+      }
+
+      .footer a {
+        font-size: .55rem;
       }
     }
 
