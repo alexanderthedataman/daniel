@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <style>
+    * {
+      z-index: 0;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      background: hsl(359, 65%, 13%);
+      position: relative;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100%;
+      color: white;
+      font-family: Roboto;
+    }
+
+    .bg {
+      background: radial-gradient(66.5% 221.21% at 136.03% -61.44%, #7950e5 0%, rgba(121, 80, 229, 0) 92.09%), radial-gradient(93.54% 126.91% at 29.15% -56.29%, rgba(254, 205, 25, .5) 0%, rgba(254, 205, 25, 0) 92.09%), radial-gradient(86.19% 101.84% at -17.13% -24.8%, rgba(255, 164, 61, .5) 0%, rgba(191, 123, 46, 0) 92.09%), hsl(359, 65%, 13%);
+      opacity: 1;
+      height: 100%;
+      position: fixed;
+      width: 100%;
+    }
+
+    a,
+    a:visited {
+      text-decoration: none;
+    }
+
+    .v1-layout {
+      min-height: 100%;
+      min-width: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      gap: 1.5rem;
+      position: absolute;
+      padding-top: 2.5rem;
+    }
+
+    .header-container {
+      display: flex;
+      /* margin-bottom: auto; */
+      flex-direction: column;
+      padding: .75rem 1.5rem;
+      gap: .3rem;
+    }
+
+    .page-content {
+      display: flex;
+      /* margin-bottom: auto; */
+      flex: 1;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+      /* gap: 1rem; */
+    }
+
+    .title {
+      font-style: italic;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-align: center;
+      text-shadow: 0.25rem 0.25rem 0.5rem black, -0.5rem 0.25rem 1rem #913736, 0.25rem -0.25rem 0.5rem #913736, -0.5rem -0.25rem 1rem black, 0.25rem 0.175rem 2rem #913736;
+      transition: font-size .3s ease-in-out;
+      opacity: .8;
+    }
+
+    .subtitle {
+      font-style: italic;
+      font-family: Montserrat;
+      font-size: .6rem;
+      text-align: center;
+      transition: font-size .4s;
+      opacity: .6;
+    }
+
+    .main-menu {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1.5rem;
+      padding: none;
+      flex-flow: column;
+    }
+
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      align-items: center;
+      width: 140px;
+      transition: .2s ease-out;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.10);
+    }
+
+    .menu-btn img {
+      height: 60px;
+      filter: grayscale(100%) blur(1px) hue-rotate(40deg) drop-shadow(4px 4px black);
+      transition: height .5s ease-in-out;
+    }
+
+    .menu-btn:hover img {
+      filter: drop-shadow(10px 10px 5px black);
+    }
+
+    .menu-btn div {
+      color: transparent;
+      text-shadow: 0 0 2px white;
+      font-size: .6rem;
+      font-style: italic;
+      text-wrap: nowrap;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: font-size .3s ease-in-out;
+      opacity: .7;
+
+    }
+
+    .menu-btn:hover div {
+      color: white;
+      text-shadow: none;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, .7);
+      height: 1.5rem;
+      width: 100%;
+      position: fixed;
+      display: flex;
+      align-items: center;
+      padding: 0 .75rem;
+      justify-content: space-around;
+      transition: height .4s ease-in;
+      z-index: 1;
+    }
+
+    .footer {
+      background: rgba(0, 0, 0, .55);
+      height: 2.5rem;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 1.75rem;
+      gap: 1.25rem;
+      justify-content: flex-end;
+      transition: height .4s ease-in;
+      z-index: 1;
+    }
+
+    .footer a {
+      font-size: .55rem;
+      color: rgba(198, 198, 198, 0.7);
+      font-family: "Montserrat";
+      text-transform: uppercase;
+      text-decoration: none
+    }
+
+    .footer a:hover {
+      transform: scale(1.1);
+    }
+
+    .navbar a {
+      font-size: .5rem;
+      transition: font-size .4s ease-in;
+    }
+
+    .navbar a:hover {
+      transform: scale(2.5);
+    }
+
+    @media (min-width: 360px) {
+      .v1-layout {
+        gap: 0rem;
+        padding-top: 1.5rem;
+      }
+
+      .title {
+        font-size: 2rem;
+        text-align: left;
+      }
+
+      .subtitle {
+        text-align: left;
+        font-size: .75rem;
+      }
+
+      .main-menu {
+        display: flex;
+        justify-content: center;
+        gap: 1.25;
+        flex-flow: row wrap;
+      }
+
+      .menu-btn img {
+        height: 90px;
+      }
+
+      .navbar {
+        height: 0;
+      }
+
+      .navbar a {
+        font-size: 0;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .title {
+        font-size: 3rem;
+      }
+
+      .header-container {
+        padding: 1rem 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .main-menu {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+        flex-flow: row wrap;
+      }
+
+      .menu-btn div {
+        font-size: .75rem;
+      }
+
+      .menu-btn img {
+        height: 125px;
+      }
+    }
+
+    @media (min-width: 1080px) {
+
+      .header-container {
+        padding: 2rem 4rem;
+      }
+
+      .title {
+        font-size: 4rem;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+      }
+
+
+      .main-menu {
+        gap: 4rem;
+        padding: 0 2.5rem;
+
+      }
+
+      .menu-btn div {
+        font-size: 1.25rem;
+      }
+
+      .menu-btn img {
+        height: 150px;
+      }
+
+
+    }
+  </style>
+  <title>Daniel Markovits</title>
+  <link href="http://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="navbar">
+    <a href="https://law.yale.edu/daniel-markovits" target="_blank" class="nav-link">🔬</a>
+    <a href="https://law.yale.edu/daniel-markovits" target="_blank" class="nav-link">⛏️</a>
+    <a href="https://law.yale.edu/daniel-markovits" target="_blank" class="nav-link">📢</a>
+    <a href="https://law.yale.edu/daniel-markovits" target="_blank" class="nav-link">📆</a>
+    <a href="https://law.yale.edu/daniel-markovits" target="_blank" class="nav-link">👨</a>
+  </div>
+
+  <div class="footer">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="nav-link">Contact Me</a>
+    <a href="https://mobile.x.com/derekberes/status/1816863614470619441" target="_blank" class="nav-link">Go Fuck
+      Yourself</a>
+
+  </div>
+  <div class="v1-layout">
+    <div class="header-container">
+      <div class="title">Daniel Markovits</div>
+      <div class="subtitle">A political scientist even your grandmother will love</div>
+    </div>
+    <div class="page-content">
+      <div class="main-menu">
+        <a href="https://law.yale.edu/daniel-markovits" target="_blank" onmouseenter="playTick()" onclick="playBoom()">
+          <div class="menu-btn">
+            <img src="https://alexanderthedataman.github.io/daniel/api/potato.png" alt="Daniel holding a potato"
+              height="100px" />
+            <div>My Research</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=qT_YSPxxFJk&amp;t=5733s" target="_blank" onmouseenter="playTick()"
+          onclick="playBoom()">
+          <div class="menu-btn">
+            <img src="https://alexanderthedataman.github.io/daniel/api/cheese.png" alt="Daniel holding cheese"
+              height="100px" />
+            <div>My Work</div>
+          </div>
+        </a>
+        <a href="https://www.project2025.org/" target="_blank" onmouseenter="playTick()" onclick="playBoom()">
+          <div class="menu-btn">
+            <img src="https://alexanderthedataman.github.io/daniel/api/omelette.png" alt="Daniel making an omelette"
+              height="100px" />
+            <div>My Advocacy</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=v-XW72XN2dk" target="_blank" onmouseenter="playTick()"
+          onclick="playBoom()">
+          <div class="menu-btn">
+            <img src="https://alexanderthedataman.github.io/daniel/api/oven.png" alt="Daniel burning pie"
+              height="100px" />
+            <div>My Plans</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=GFJO8gW83BE" target="_blank" onmouseenter="playTick()"
+          onclick="playBoom()">
+          <div class="menu-btn">
+            <img src="https://alexanderthedataman.github.io/daniel/api/salute.png" alt="Daniel saluting Canada"
+              height="100px" />
+            <div>My Bio</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div style="flex: .5">
+    </div>
+  </div>
+  <script>
+    let tick = new Audio('https://alexanderthedataman.github.io/daniel/api/tick.mp3');
+    let boom = new Audio('https://alexanderthedataman.github.io/daniel/api/boom.mp3')
+
+    let menuButtons = document.querySelectorAll(".menu-btn");
+
+
+    function playTick() {
+      tick.currentTime = 0;
+      tick.play();
+    };
+
+    function playBoom() {
+      boom.currentTime = 0;
+      boom.play();
+    };
+
+  </script>
+</body>
+
+</html>
